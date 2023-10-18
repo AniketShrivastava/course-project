@@ -1,17 +1,17 @@
-# LMS Frontend
+# Course-project Frontend
 
 ### Setup instructions 
 
 1. Clone the project 
 ...
 
-  git clone https://github.com/AniketShrivastava/lms-frontend-on
+  git clone https://github.com/AniketShrivastava/course-project
 ...
 
 2. Move to the directory
 
 ...
-  cd lms-frontend-on
+  cd course-project
 ...
 
 3. Install dependencies
