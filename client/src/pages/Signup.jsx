@@ -62,19 +62,37 @@ function Signup() {
             toast.error("Invalid password provided, password should 6-16 character long with atleast a number and a special character");
             return;
         }
-        const response = await dispatch(createAccount(signupDetails));
-        console.log(response);
-        if(response?.payload?.success){
-            navigate("/")
-        }
-        setSignupDetails({
-            email: "",
+         // password validation using regex
+    if (!signupData.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/)) {
+        toast.error(
+          "Minimum password length should be 8 with Uppercase, Lowercase, Number and Symbol"
+        );
+        return;
+      }
+  
+      // creating the form data from the existing data
+      const formData = new FormData();
+      formData.append("fullName", signupData.fullName);
+      formData.append("email", signupData.email);
+      formData.append("password", signupData.password);
+      formData.append("avatar", signupData.avatar);
+  
+      // calling create account action
+      const res = await dispatch(createAccount(formData));
+  
+      // redirect to login page if true
+      if (res.payload.success) navigate("/login");
+  
+      // clearing the signup inputs
+      setSignupDetails({
         fullName: "",
+        email: "",
         password: "",
-        avatar: ""
-        });
-        setPreviewImage("");
-    }
+        avatar: "",
+      });
+      setImagePreview("");
+    };
+  
 
     return (
         <HomeLayout>
